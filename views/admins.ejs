@@ -82,7 +82,7 @@
             <aside class="menu">
                 <ul class="menu-list">
                     <li>
-                        <a class="is-active" href="/users-page">
+                        <a class="" href="/users-page">
                             <span class="icon">
                                 <i class="fa fa-table"></i>
                             </span> Users
@@ -96,7 +96,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="" href="/admins-page">
+                        <a class="is-active" href="/admins-page">
                             <span class="icon">
                                 <i class="fa fa-table"></i>
                             </span> Admins
@@ -129,7 +129,7 @@
                         </div>
                         <div class="field has-addons">
                             <p class="control">
-                                <a class="button" href="/user-create">
+                                <a class="button" href="/admin-create">
                                     <span class="icon is-small">
                                         <i class="fa fa-plus"></i>
                                     </span>
@@ -151,31 +151,35 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Login</th>
+                                    <th>Password</th>
+                                    <th>Role</th>
                                     <th class="has-text-centered">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% users.forEach(user=> { %>
+                                <% admins.forEach(admin=> { %>
                                     <tr>
                                         <td>
-                                            <%= user.id %>
+                                            <%= admin.id %>
                                         </td>
                                         <td>
-                                            <%= user.email %>
+                                            <%= admin.username %>
                                         </td>
                                         <td>
-                                            <%= user.phone %>
+                                            <%= admin.login %>
                                         </td>
                                         <td>
-                                            <%= user.name %>
+                                            <%= admin.password %>
+                                        </td>
+                                        <td>
+                                            <%= admin.roleId %>
                                         </td>
                                         <td class="has-text-centered">
                                             <div class="field is-grouped action">
                                                 <p class="control">
-                                                    <a href="/user-edit/<%= user.id %>"
+                                                    <a href="/admin-edit/<%= admin.id %>"
                                                         class="button is-rounded is-text">
                                                         <span class="icon">
                                                             <i class="fa fa-edit"></i>
@@ -183,7 +187,7 @@
                                                     </a>
                                                 </p>
                                                 <p class="control">
-                                                    <button onclick="remove('/user/<%= user.id %>')"
+                                                    <button onclick="remove('/admin/<%= admin.id %>')"
                                                         class="button is-rounded is-text action-delete" data-id="1">
                                                         <span class="icon">
                                                             <i class="fa fa-trash"></i>

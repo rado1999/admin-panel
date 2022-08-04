@@ -44,14 +44,7 @@
         <div id="navMenu" class="navbar-menu column is-hidden-touch">
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <a class="button is-white" onclick="Auth.logout()">
-                        <span class="icon">
-                            <i class="fa fa-lg fa-bell"></i>
-                        </span>
-                    </a>
-                </div>
-                <div class="navbar-item">
-                    <a class="button is-white" onclick="Auth.logout()">
+                    <a class="button is-white" onclick="logout()">
                         <span class="icon">
                             <i class="fa fa-lg fa-power-off"></i>
                         </span>
@@ -122,13 +115,13 @@
                                     </div>
                                 <% }) %>
                                 <div class="buttons">
-                                    <button onclick="create('/users')" class="button is-success">
+                                    <button onclick="create('/<%= result[1].toLowerCase() %>')" class="button is-success">
                                         <span class="icon is-small">
                                             <i class="fa fa-check"></i>
                                         </span>
                                         <span>Save</span>
                                     </button>
-                                    <button onclick="document.location='/<%= result[1] %>s-page'" class="button is-danger is-outlined">
+                                    <button onclick="document.location='/<%= result[1].toLowerCase() %>s-page'" class="button is-danger is-outlined">
                                         <span class="icon is-small">
                                             <i class="fa fa-times"></i>
                                         </span>
@@ -143,6 +136,7 @@
         </div>
 
         <script src="js/send.js"></script>
+        <script src="js/login.js"></script>
 </body>
 
 <!-- Mirrored from nafplann.bulma-admin.dev/datatables by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 Jul 2019 05:38:02 GMT -->

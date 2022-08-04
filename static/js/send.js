@@ -18,7 +18,7 @@ async function patch(url) {
     })
 
     const back = url.split('/')[1]
-    document.location = `/${back}-page`
+    document.location = `/${back}s-page`
 }
 
 async function create(url) {
@@ -28,7 +28,7 @@ async function create(url) {
     const result = {}
 
     for (let i = 0; i < labels.length; i++) {
-        const key = labels[i].textContent.trim().toLocaleLowerCase()
+        const key = labels[i].textContent.trim()
         const value = inputs[i].value.trim()
         result[key] = value
     }
@@ -43,7 +43,7 @@ async function create(url) {
     })
 
     const back = url.split('/')[1]
-    document.location = `/${back}-page`
+    document.location = `/${back}s-page`
 }
 
 async function remove(url) {
@@ -56,5 +56,5 @@ async function remove(url) {
     })
 
     const back = url.split('/')[1]
-    document.location = `/${back}-page`
+    document.location = `/${back}s-page`
 }
