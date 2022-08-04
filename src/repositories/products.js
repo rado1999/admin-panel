@@ -48,4 +48,27 @@ export default class ProductsRepo {
     static async delete(id) {
         return await pool.query('DELETE FROM product WHERE id = $1', [id])
     }
+
+    static async forEdit(id) {
+        const product = await pool.query(`
+            SELECT product.title, company, model, "mainDescription", price,
+            category.title AS category, sub_category.title AS "subCategory"
+            FROM product
+            JOIN category ON category.id = product."categoryId"
+            JOIN sub_category ON sub_category.id = product."subCategoryId"
+            WHERE product.id = $1
+        `, [id])
+
+        const category = await pool.query(`
+            SELECT category.title FROM category
+        `)
+
+        const subCategory = await pool.query(`
+        SELECT sub_category.title FROM sub_category
+        `)
+
+        console.log(category.rows)
+        
+        return [product.rows[0], category.rows, subCategory.rows]
+    }
 }

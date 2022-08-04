@@ -14,8 +14,11 @@ export class App {
 
         app.set('view engine', 'ejs')
         app.use(
-            '/',
-            express.static('/home/rado/Codes/js_projects/admin/static')
+            [
+                '/users-page', '/user-edit', '/products-page', '/product-edit',
+                '/user-create', '/login'
+            ],
+            express.static('/home/rado/Codes/js_projects/admin-panel/static')
         )
 
         app.use(userRouter)
