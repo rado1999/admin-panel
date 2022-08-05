@@ -146,44 +146,36 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <% Object.keys(result[0][0]).forEach(title => { %>
-                                        <% if (title !== 'category' && title !== 'subCategory') { %>
+                                    <% result[0].forEach(title => { %>
+                                        <% if (title !== 'Category' && title !== 'Sub Category') { %>
                                             <div class="field">
                                                 <label class="label"><%= title %> </label>
                                                 <div class="control">
-                                                    <input type="text" name="<%= title %>" class="input is-primary" value="<%= result[0][0][title] %>">
+                                                    <input type="text" name="<%= title %>" class="input is-primary" value="">
                                                 </div>
                                             </div>
-                                        <% } else if (title === 'category') { %>
+                                        <% } else if (title === 'Category') { %>
                                             <div class="field">
                                                 <label class="label"><%= title %> </label>
                                                 <div class="control">
                                                       <div class="select">
                                                         <select name="category">
-                                                            <% result[0][1].forEach(element => { %>
-                                                                <% if (result[0][0].category === element.title) { %>
-                                                                    <option value="<%= element.id %>" selected><%= element.title %></option>
-                                                                <% } else { %>
-                                                                    <option value="<%= element.id %>"><%= element.title %></option>        
-                                                                <% } %>
+                                                            <% result[2][0].forEach(element => { %>
+                                                                <option value="<%= element.id %>"><%= element.title %></option>
                                                             <% }) %>
                                                         </select>
                                                       </div>  
                                                 </div>
                                             </div>
-                                        <% } else if (title === 'subCategory') { %>
+                                        <% } else if (title === 'Sub Category') { %>
                                             <div class="field">
                                                 <label class="label"><%= title %> </label>
                                                 <div class="control">
                                                       <div class="select">
                                                         <select name="subCategory">
                                                             <option value=""></option>
-                                                            <% result[0][2].forEach(element => { %>
-                                                                <% if (result[0][0].subCategory === element.title) { %>
-                                                                    <option value="<%= element.id %>" selected><%= element.title %></option>
-                                                                <% } else { %>
-                                                                    <option value="<%= element.id %>"><%= element.title %></option>        
-                                                                <% } %>
+                                                            <% result[2][1].forEach(element => { %>
+                                                                <option value="<%= element.id %>"><%= element.title %></option>
                                                             <% }) %>
                                                         </select>
                                                       </div>  

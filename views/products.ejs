@@ -129,7 +129,7 @@
                         </div>
                         <div class="field has-addons">
                             <p class="control">
-                                <a class="button" href="#">
+                                <a class="button" href="/product-create">
                                     <span class="icon is-small">
                                         <i class="fa fa-plus"></i>
                                     </span>
@@ -199,7 +199,7 @@
                                                     </a>
                                                 </p>
                                                 <p class="control">
-                                                    <a class="button is-rounded is-text action-delete" data-id="1">
+                                                    <a onclick="remove('/product/<%= product.id %>')" class="button is-rounded is-text action-delete" data-id="1">
                                                         <span class="icon">
                                                             <i class="fa fa-trash"></i>
                                                         </span>
@@ -218,6 +218,7 @@
 
         <script src="js/app.js"></script>
         <script src="js/login.js"></script>
+        <script src="js/send.js"></script>
         <script>
             $(document).ready(function () {
                 var table = $('#datatable').DataTable({

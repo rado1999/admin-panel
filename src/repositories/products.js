@@ -16,16 +16,17 @@ export default class ProductsRepo {
     static async create(body) {
         const {
             imageUrl, title, company, companyImage, model, mainDescription,
-            price, categoryId, subCategoryId
+            price, category, subCategory
         } = body
+
         await pool.query(`
-            INSERT INTO product (id, "imageUrl", title, company,
+            INSERT INTO product ("imageUrl", title, company,
             "companyImage", model, "mainDescription", price,
             "categoryId", "subCategoryId")
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         `, [
             imageUrl, title, company, companyImage, model, mainDescription,
-            price, categoryId, subCategoryId
+            price, category, subCategory
         ])
     }
 
@@ -55,7 +56,7 @@ export default class ProductsRepo {
             category.title AS category, sub_category.title AS "subCategory"
             FROM product
             JOIN category ON category.id = product."categoryId"
-            JOIN sub_category ON sub_category.id = product."subCategoryId"
+            LEFT OUTER JOIN sub_category ON sub_category.id = product."subCategoryId"
             WHERE product.id = $1
         `, [id])
 
@@ -67,8 +68,15 @@ export default class ProductsRepo {
         SELECT sub_category.title FROM sub_category
         `)
 
-        console.log(category.rows)
+        console.log(product.rows[0])
         
         return [product.rows[0], category.rows, subCategory.rows]
+    }
+
+    static async forCreate() {
+        const category = await pool.query('SELECT id, title FROM category')
+        const subCategory = await pool.query('SELECT id, title FROM sub_category')
+
+        return [category.rows, subCategory.rows]
     }
 }

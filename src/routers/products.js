@@ -1,5 +1,17 @@
-import { Router } from 'express'
+import e, { Router } from 'express'
 import ProductsRepo from '../repositories/products.js'
+import multer from 'multer'
+
+const storageConfig = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '/home/rado/Codes/js_projects/sumbar/main/public/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+})
+
+const uploads = multer({ storage: storageConfig })
 
 export const productsRouter = Router()
 
@@ -15,8 +27,39 @@ productsRouter.get('/product/:id', async (req, res) => {
     return res.send(product)
 })
 
-productsRouter.post('/product', async (req, res) => {
-    await ProductsRepo.create(req.body)
+productsRouter.post('/product', uploads.fields([
+    { name: 'images' }, { name: 'logo', maxCount: 1 }
+]), async (req, res) => {
+    const {
+        Title, Company, Model, Description, Price, category, subCategory
+    } = req.body
+
+    let urls, logo
+    
+    if (req.files.images) {
+        urls = req.files.images.map(value => `http://95.85.127.250:3002/${value.path.split('/')[8]}`)
+    } else {
+        urls = []
+    }
+    
+    if (req.files.logo) {
+        logo = `http://95.85.127.250:3002/${req.files.logo[0].path.split('/')[8]}`
+    } else {
+        logo = ''
+    }
+
+    const result = {
+        imageUrl: urls,
+        title: Title,
+        company: Company,
+        companyImage: logo,
+        model: Model,
+        mainDescription: Description,
+        price: +Price,
+        category: +category,
+        subCategory: +subCategory ? subCategory : undefined
+    }
+    await ProductsRepo.create(result)
     return res.sendStatus(201)
 })
 

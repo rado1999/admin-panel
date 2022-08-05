@@ -50,3 +50,14 @@ pagesRouter.get('/product-edit/:id', checkToken, async (req, res) => {
     if (!array) return res.statusCode(404)
     return res.render('product-edit', { result: [array, 'Product'] })
 })
+
+pagesRouter.get('/product-create', checkToken, async (req, res) => {
+    const columns = [
+        'Title', 'Company', 'Model',
+        'Description', 'Price', 'Category', 'Sub Category'
+    ]
+    const categories = await ProductsRepo.forCreate()
+    return res.render('product-create', {
+        result: [columns, 'Product', categories]
+    })
+})
