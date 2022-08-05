@@ -35,7 +35,7 @@ productsRouter.post('/product', uploads.fields([
     } = req.body
 
     let urls, logo
-    
+    console.log(files)
     if (req.files.images) {
         urls = req.files.images.map(value => `http://95.85.127.250:3002/${value.path.split('/')[8]}`)
     } else {
@@ -60,7 +60,7 @@ productsRouter.post('/product', uploads.fields([
         subCategory: +subCategory ? subCategory : undefined
     }
     await ProductsRepo.create(result)
-    return res.sendStatus(201)
+    return res.redirect('http://95.85.127.250:3005/products-page')
 })
 
 productsRouter.patch('/product/:id', async (req, res) => {
