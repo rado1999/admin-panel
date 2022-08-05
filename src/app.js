@@ -13,7 +13,7 @@ export class App {
         app.use(express.json())
         app.use(express.urlencoded({ extended: false }))
         app.use(cors)
-        app.use(prompt)
+        // app.use(prompt)
 
         app.set('view engine', 'ejs')
         app.use(
@@ -22,7 +22,7 @@ export class App {
                 '/products-page', '/product-edit', 'product-create',
                 '/admins-page', '/admin-edit', '/admin-create', '/'
             ],
-            express.static('/home/rado/Codes/js_projects/admin-panel/static')
+            express.static('/home/admin-panel/static')
         )
 
         app.use(userRouter)
