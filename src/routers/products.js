@@ -1,10 +1,10 @@
-import e, { Router } from 'express'
+import { Router } from 'express'
 import ProductsRepo from '../repositories/products.js'
 import multer from 'multer'
 
 const storageConfig = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '/home/rado/Codes/js_projects/sumbar/main/public/')
+        cb(null, '/home/sumbar/main/public/')
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname)
