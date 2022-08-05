@@ -29,7 +29,6 @@ export default class AdminRepo {
     }
 
     static async update(id, body) {
-        console.log(body)
         const { username, login, password, roleId } = body
         await pool.query(`
             UPDATE "admin" SET username = $1, login = $2,
