@@ -37,13 +37,13 @@ productsRouter.post('/product', uploads.fields([
     let urls, logo
     console.log(files)
     if (req.files.images) {
-        urls = req.files.images.map(value => `http://95.85.127.250:3002/${value.path.split('/')[8]}`)
+        urls = req.files.images.map(value => `http://95.85.127.250:3002/${value.originalname}`)
     } else {
         urls = []
     }
     
     if (req.files.logo) {
-        logo = `http://95.85.127.250:3002/${req.files.logo[0].path.split('/')[8]}`
+        logo = `http://95.85.127.250:3002/${req.files.logo[0].originalname}`
     } else {
         logo = ''
     }
